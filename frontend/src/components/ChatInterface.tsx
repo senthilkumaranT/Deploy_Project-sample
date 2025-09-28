@@ -55,14 +55,19 @@ const ChatInterface = ({ onBackToLanding }: ChatInterfaceProps) => {
     setIsTyping(true);
 
     try {
+      console.log('Sending request to /api/llm with question:', question);
       const response = await fetch('/api/llm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question })
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
       if (!response.ok) {
         const errorText = await response.text();
+        console.error('Error response:', errorText);
         throw new Error(errorText || `Request failed with status ${response.status}`);
       }
 
@@ -75,9 +80,10 @@ const ChatInterface = ({ onBackToLanding }: ChatInterfaceProps) => {
       };
       setMessages(prev => [...prev, botResponse]);
     } catch (error: any) {
+      console.error('Full error:', error);
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: `Sorry, I ran into an error: ${error?.message || 'Unknown error'}`,
+        content: `Sorry, I ran into an error: ${error?.message || 'Unknown error'}. Please check if the backend server is running on http://localhost:8004`,
         sender: 'bot',
         timestamp: new Date()
       };

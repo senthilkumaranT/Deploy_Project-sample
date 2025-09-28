@@ -15,6 +15,8 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
 ]
 
 app.add_middleware(
@@ -31,6 +33,11 @@ class QuestionRequest(BaseModel):
 class AnswerResponse(BaseModel):
     answer: str
 
+@app.get("/")
+def health_check():
+    """Health check endpoint"""
+    return {"status": "healthy", "message": "AI Chatbot API is running"}
+
 @app.post("/llm", response_model=AnswerResponse)
 def get_llm_answer(request: QuestionRequest):
     """
@@ -44,4 +51,4 @@ def get_llm_answer(request: QuestionRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8004, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8004, reload=True)

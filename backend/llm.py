@@ -1,6 +1,10 @@
 from groq import Groq
 
-client = Groq(api_key="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")
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def llm_completion(question):
     chat_completion = client.chat.completions.create(

@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Send, ArrowLeft, Bot, User } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Message {
   id: string;
@@ -39,9 +41,11 @@ const ChatInterface = ({ onBackToLanding }: ChatInterfaceProps) => {
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
+    const question = inputValue;
+
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: inputValue,
+      content: question,
       sender: 'user',
       timestamp: new Date()
     };
@@ -50,30 +54,37 @@ const ChatInterface = ({ onBackToLanding }: ChatInterfaceProps) => {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate AI response with delay
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/llm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || `Request failed with status ${response.status}`);
+      }
+
+      const data: { answer: string } = await response.json();
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: generateResponse(inputValue),
+        content: data.answer,
         sender: 'bot',
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botResponse]);
+    } catch (error: any) {
+      const botResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        content: `Sorry, I ran into an error: ${error?.message || 'Unknown error'}`,
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, botResponse]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
-  };
-
-  const generateResponse = (question: string): string => {
-    const responses = [
-      "That's a great question! Based on my understanding, here's what I think...",
-      "I'd be happy to help you with that. From my knowledge base, I can tell you that...",
-      "Interesting question! Let me provide you with some insights on this topic...",
-      "Thanks for asking! Here's my perspective on your question...",
-      "That's something I can definitely help with. Allow me to explain..."
-    ];
-    
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    return `${randomResponse} This is a simulated response to: "${question}". In a real implementation, this would connect to an actual AI service for more intelligent responses.`;
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -103,7 +114,7 @@ const ChatInterface = ({ onBackToLanding }: ChatInterfaceProps) => {
             </div>
             <div>
               <h2 className="font-semibold">AI Assistant</h2>
-              <p className="text-sm text-muted-foreground">Online</p>
+              <p className="text-sm text-muted-foreground">{isTyping ? 'Typing…' : 'Online'}</p>
             </div>
           </div>
           
@@ -130,7 +141,9 @@ const ChatInterface = ({ onBackToLanding }: ChatInterfaceProps) => {
                   </div>
                   
                   <Card className={`p-4 ${message.sender === 'user' ? 'chat-message-user' : 'chat-message-bot'}`}>
-                    <p className="text-sm">{message.content}</p>
+                    <div className="prose prose-sm max-w-none dark:prose-invert">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+                    </div>
                     <p className="text-xs opacity-70 mt-2">
                       {message.timestamp.toLocaleTimeString()}
                     </p>

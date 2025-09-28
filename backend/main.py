@@ -7,8 +7,23 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from llm import llm_completion
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Allow frontend dev origins (adjust as needed for production)
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class QuestionRequest(BaseModel):
     question: str
@@ -23,7 +38,7 @@ def get_llm_answer(request: QuestionRequest):
     """
     try:
         answer = llm_completion(request.question)
-        return AnswerResponse(answer=answer)
+        return {"answer": answer}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

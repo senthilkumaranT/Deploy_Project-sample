@@ -1,0 +1,62 @@
+2025-09-28 18:15:00,784 - main - INFO - Starting AI Chatbot API...
+2025-09-28 18:15:00,784 - main - INFO - API Version: 1.0.0
+2025-09-28 18:15:00,784 - main - INFO - Debug Mode: False
+2025-09-28 18:15:57,965 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:15:57,966 - middleware.logging_middleware - INFO - Response: 307 in 0.0010s for POST /llm
+2025-09-28 18:19:04,748 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:19:04,748 - middleware.logging_middleware - INFO - Response: 307 in 0.0011s for POST /llm
+2025-09-28 18:19:09,984 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:19:09,985 - middleware.logging_middleware - INFO - Response: 307 in 0.0010s for POST /llm
+2025-09-28 18:19:09,986 - middleware.logging_middleware - INFO - Request: POST /llm/ from 127.0.0.1
+2025-09-28 18:19:09,989 - routes.llm_routes - INFO - Received question: temprl business pvt ltd ...
+2025-09-28 18:19:09,989 - services.llm_service - INFO - Processing question: temprl business pvt ltd ...
+2025-09-28 18:19:11,427 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 18:19:11,429 - services.llm_service - INFO - Successfully generated response
+2025-09-28 18:19:11,429 - routes.llm_routes - INFO - Successfully generated LLM response
+2025-09-28 18:19:11,432 - middleware.logging_middleware - INFO - Response: 200 in 1.4461s for POST /llm/
+2025-09-28 18:19:15,863 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:19:15,864 - middleware.logging_middleware - INFO - Response: 307 in 0.0010s for POST /llm
+2025-09-28 18:19:41,256 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:19:41,256 - middleware.logging_middleware - INFO - Response: 307 in 0.0000s for POST /llm
+2025-09-28 18:20:38,455 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:20:38,456 - middleware.logging_middleware - INFO - Response: 307 in 0.0000s for POST /llm
+2025-09-28 18:21:36,681 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:21:36,681 - middleware.logging_middleware - INFO - Response: 307 in 0.0000s for POST /llm
+2025-09-28 18:22:03,903 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:22:03,904 - middleware.logging_middleware - INFO - Response: 307 in 0.0010s for POST /llm
+2025-09-28 18:22:04,216 - middleware.logging_middleware - INFO - Request: OPTIONS /llm/ from 127.0.0.1
+2025-09-28 18:22:04,217 - middleware.logging_middleware - INFO - Response: 200 in 0.0010s for OPTIONS /llm/
+2025-09-28 18:22:04,221 - middleware.logging_middleware - INFO - Request: POST /llm/ from 127.0.0.1
+2025-09-28 18:22:04,223 - routes.llm_routes - INFO - Received question: hi...
+2025-09-28 18:22:04,224 - services.llm_service - INFO - Processing question: hi...
+2025-09-28 18:22:04,762 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 18:22:04,763 - services.llm_service - INFO - Successfully generated response
+2025-09-28 18:22:04,763 - routes.llm_routes - INFO - Successfully generated LLM response
+2025-09-28 18:22:04,764 - middleware.logging_middleware - INFO - Response: 200 in 0.5431s for POST /llm/
+2025-09-28 18:22:08,664 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:22:08,665 - middleware.logging_middleware - INFO - Response: 307 in 0.0010s for POST /llm
+2025-09-28 18:22:08,671 - middleware.logging_middleware - INFO - Request: POST /llm/ from 127.0.0.1
+2025-09-28 18:22:08,672 - routes.llm_routes - INFO - Received question: dosa...
+2025-09-28 18:22:08,672 - services.llm_service - INFO - Processing question: dosa...
+2025-09-28 18:22:09,985 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 18:22:09,985 - services.llm_service - INFO - Successfully generated response
+2025-09-28 18:22:09,986 - routes.llm_routes - INFO - Successfully generated LLM response
+2025-09-28 18:22:09,986 - middleware.logging_middleware - INFO - Response: 200 in 1.3147s for POST /llm/
+2025-09-28 18:22:41,402 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:22:41,402 - middleware.logging_middleware - INFO - Response: 307 in 0.0000s for POST /llm
+2025-09-28 18:22:41,711 - middleware.logging_middleware - INFO - Request: POST /llm/ from 127.0.0.1
+2025-09-28 18:22:41,711 - routes.llm_routes - INFO - Received question: hello...
+2025-09-28 18:22:41,712 - services.llm_service - INFO - Processing question: hello...
+2025-09-28 18:22:41,956 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 18:22:41,957 - services.llm_service - INFO - Successfully generated response
+2025-09-28 18:22:41,957 - routes.llm_routes - INFO - Successfully generated LLM response
+2025-09-28 18:22:41,957 - middleware.logging_middleware - INFO - Response: 200 in 0.2461s for POST /llm/
+2025-09-28 18:22:50,617 - middleware.logging_middleware - INFO - Request: POST /llm from 127.0.0.1
+2025-09-28 18:22:50,617 - middleware.logging_middleware - INFO - Response: 307 in 0.0000s for POST /llm
+2025-09-28 18:22:50,929 - middleware.logging_middleware - INFO - Request: POST /llm/ from 127.0.0.1
+2025-09-28 18:22:50,930 - routes.llm_routes - INFO - Received question: hwo to prepare dosa...
+2025-09-28 18:22:50,930 - services.llm_service - INFO - Processing question: hwo to prepare dosa...
+2025-09-28 18:22:52,826 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-28 18:22:52,828 - services.llm_service - INFO - Successfully generated response
+2025-09-28 18:22:52,828 - routes.llm_routes - INFO - Successfully generated LLM response
+2025-09-28 18:22:52,829 - middleware.logging_middleware - INFO - Response: 200 in 1.9001s for POST /llm/

@@ -79,11 +79,12 @@ const ChatInterface = ({ onBackToLanding }: ChatInterfaceProps) => {
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botResponse]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Full error:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: `Sorry, I ran into an error: ${error?.message || 'Unknown error'}. Please check if the backend server is running on http://localhost:8004`,
+        content: `Sorry, I ran into an error: ${errorMessage || 'Unknown error'}. Please check if the backend server is running on http://localhost:8004`,
         sender: 'bot',
         timestamp: new Date()
       };

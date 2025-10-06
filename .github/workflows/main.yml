@@ -29,6 +29,14 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ env.PYTHON_VERSION }}-${{ hashFiles('backend/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ env.PYTHON_VERSION }}-
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -85,6 +93,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Set image tags
         id: meta
         run: |
@@ -105,6 +116,8 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ env.REGISTRY }}/${{ steps.image.outputs.backend }}:${{ steps.meta.outputs.sha_tag }}
             ${{ env.REGISTRY }}/${{ steps.image.outputs.backend }}:${{ steps.meta.outputs.latest_tag }}
@@ -115,6 +128,8 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ env.REGISTRY }}/${{ steps.image.outputs.frontend }}:${{ steps.meta.outputs.sha_tag }}
             ${{ env.REGISTRY }}/${{ steps.image.outputs.frontend }}:${{ steps.meta.outputs.latest_tag }}

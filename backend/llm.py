@@ -53,6 +53,10 @@ def llm_completion(question):
     except Exception as e:
         return f"Error calling GROQ API: {str(e)}"
 
+def chat_with_groq(question):
+    """Backward-compatible wrapper expected by tests."""
+    return llm_completion(question)
+
 if __name__ == "__main__":
     question = input("Enter your question: ")
     answer = llm_completion(question)

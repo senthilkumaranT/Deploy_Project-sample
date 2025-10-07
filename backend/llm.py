@@ -54,7 +54,7 @@ def llm_completion(question):
         return f"Error calling GROQ API: {str(e)}"
 
 def chat_with_groq(question):
-    """Backward-compatible wrapper expected by test."""
+    """calling the llm_completion function."""
     return llm_completion(question)
 
 if __name__ == "__main__":
